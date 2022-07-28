@@ -1,0 +1,36 @@
+<p id="notice"><%= notice %></p>
+
+<div class="p-3 mb-2 bg-warning text-dark">
+  Welcome to <%= @station.name.upcase %> Junction
+</div>
+
+
+<div class="row">
+  <div class="col-md-6">
+    <h1>All Trains</h1>
+      <% @trains.each do |train_1| %>
+        <div>
+          <%= link_to train_1.name, train_path(train_1) , class: "btn btn-outline-secondary" %>
+        </div><br>
+    <% end %>
+  </div>
+  <div class="col-md-6">
+    <h1>Trains After 2 hours Later</h1>
+    <% @trains.each do |train_1| %>
+      <% train_1.train_times.each do |train_time| %>
+      <% @station.train_times.each do |train_time2|%>
+        <% if range_of_current_to_two_hour_later.include?(train_time.arrival) && (train_time == train_time2) %>
+        <div>
+          <%= link_to train_1.name, train_path(train_1) , class: "btn btn-outline-secondary" %>
+        </div><br>
+        <% end %>
+      <% end %>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+
+
+<div>
+  <%= link_to 'Back', stations_path %>
+</div>

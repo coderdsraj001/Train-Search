@@ -1,0 +1,9 @@
+<p id="notice"><%= notice %></p>
+
+<div class="row">
+  <div class="col">
+    <div class="p-4 mb-2 bg-primary text-white "><%= @train.name %> Route</div>
+  </div>
+</div> 
+
+<%= render "trains/route", obj: @train %>
