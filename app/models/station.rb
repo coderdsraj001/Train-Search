@@ -8,6 +8,8 @@ class Station < ApplicationRecord
 	def self.search(search)
 		if search
 			where(['name LIKE ?', "%#{search}%"])
+		else
+			all.limit(2)
 		end
 	end
 end
