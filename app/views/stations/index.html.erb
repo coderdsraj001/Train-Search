@@ -15,7 +15,9 @@
   <tbody>
     <% @stations.each do |station| %>
       <tr>
-        <td><%= link_to station.name, station, class: "btn btn-outline-secondary" %></td>
+        <td>
+          <%= link_to station.name, station, class: "btn btn-outline-secondary" %>
+        </td>
       </tr>
     <% end %>
   </tbody>

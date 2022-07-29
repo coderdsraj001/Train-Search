@@ -9,7 +9,7 @@ class Station < ApplicationRecord
 		if search
 			where(['name LIKE ?', "%#{search}%"])
 		else
-			all.limit(2)
+			#all.limit(2)
 		end
 	end
 end

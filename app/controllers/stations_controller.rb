@@ -9,6 +9,8 @@ class StationsController < ApplicationController
     end
   end
 
+\
+
   def show
     @trains = @station.trains
   end
@@ -24,7 +26,7 @@ class StationsController < ApplicationController
     @station = Station.new(station_params)
     respond_to do |format|
       if @station.save
-        format.html { redirect_to station_url(@station), notice: "Station was successfully created." }
+        format.html { redirect_to station_path(@station), notice: "Station was successfully created." }
       else
         format.html { render :new, status: :unprocessable_entity }
       end
@@ -34,7 +36,7 @@ class StationsController < ApplicationController
   def update
     respond_to do |format|
       if @station.update(station_params)
-        format.html { redirect_to station_url(@station), notice: "Station was successfully updated." }
+        format.html { redirect_to station_path(@station), notice: "Station was successfully updated." }
       else
         format.html { render :edit, status: :unprocessable_entity }
       end
@@ -45,7 +47,7 @@ class StationsController < ApplicationController
     @station.destroy
 
     respond_to do |format|
-      format.html { redirect_to stations_url, notice: "Station was successfully destroyed." }
+      format.html { redirect_to stations_path, notice: "Station was successfully destroyed." }
     end
   end
 

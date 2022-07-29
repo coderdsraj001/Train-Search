@@ -8,10 +8,6 @@ class ApplicationController < ActionController::Base
 	  total_in_minutes = hr.hours + min.minutes 
 	  Time.at(total_in_minutes).utc.strftime("%H:%M")
 	end
-
-	def convert_hours_mm_sec_str_to_integer
-		'12:34:56	'.split(':').map(&:to_i).inject(0) { |a, b| a * 60 + b }
-	end
 	
 	def range_of_current_to_two_hour_later
 		time = Time.new

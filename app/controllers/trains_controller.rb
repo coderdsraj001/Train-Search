@@ -20,7 +20,7 @@ class TrainsController < ApplicationController
 
     respond_to do |format|
       if @train.save
-        format.html { redirect_to train_url(@train), notice: "Train was successfully created." }
+        format.html { redirect_to train_path(@train), notice: "Train was successfully created." }
       else
         format.html { render :new, status: :unprocessable_entity }
       end
@@ -30,7 +30,7 @@ class TrainsController < ApplicationController
   def update
     respond_to do |format|
       if @train.update(train_params)
-        format.html { redirect_to train_url(@train), notice: "Train was successfully updated." }
+        format.html { redirect_to train_path(@train), notice: "Train was successfully updated." }
       else
         format.html { render :edit, status: :unprocessable_entity }
       end
@@ -41,7 +41,7 @@ class TrainsController < ApplicationController
     @train.destroy
 
     respond_to do |format|
-      format.html { redirect_to trains_url, notice: "Train was successfully destroyed." }
+      format.html { redirect_to trains_path, notice: "Train was successfully destroyed." }
     end
   end
 
