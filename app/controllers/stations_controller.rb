@@ -9,8 +9,6 @@ class StationsController < ApplicationController
     end
   end
 
-\
-
   def show
     @trains = @station.trains
   end
@@ -24,31 +22,29 @@ class StationsController < ApplicationController
 
   def create
     @station = Station.new(station_params)
-    respond_to do |format|
-      if @station.save
-        format.html { redirect_to station_path(@station), notice: "Station was successfully created." }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-      end
+    if @station.save
+      redirect_to station_path(@station)
+      flash[:notice] = "Train was successfully created."
+    else
+      render 'new'
+      flash[:notice] = "There is something wrong."
     end
   end
 
   def update
-    respond_to do |format|
-      if @station.update(station_params)
-        format.html { redirect_to station_path(@station), notice: "Station was successfully updated." }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-      end
+    if @station.update(station_params)
+      redirect_to station_path(@station)
+      flash[:notice] = "Station was successfully updated." 
+    else
+      render 'edit'
+      flash[:notice] = "There is something wrong."
     end
   end
 
   def destroy
     @station.destroy
-
-    respond_to do |format|
-      format.html { redirect_to stations_path, notice: "Station was successfully destroyed." }
-    end
+    redirect_to stations_path
+    flash[:notice] = "Station was successfully destroyed."
   end
 
   private

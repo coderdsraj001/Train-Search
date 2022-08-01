@@ -18,30 +18,29 @@ class TrainsController < ApplicationController
   def create
     @train = Train.new(train_params)
 
-    respond_to do |format|
-      if @train.save
-        format.html { redirect_to train_path(@train), notice: "Train was successfully created." }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-      end
+    if @train.save
+      redirect_to train_path(@train)
+      flash[:notice] = "Train was successfully created."
+    else
+      render 'new'
+      flash[:notice] = "There is something wrong."
     end
   end
 
   def update
-    respond_to do |format|
-      if @train.update(train_params)
-        format.html { redirect_to train_path(@train), notice: "Train was successfully updated." }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-      end
+    if @train.update(train_params)
+      redirect_to train_path(@train)
+      flash[:notice] = "Train was successfully updated."
+    else
+      render 'edit'
+      flash[:notice] = "There is something wrong."
     end
   end
 
   def destroy
-    @train.destroy
-
-    respond_to do |format|
-      format.html { redirect_to trains_path, notice: "Train was successfully destroyed." }
+    if @train.destroy
+      redirect_to trains_path
+      flash[:notice] = "Train was successfully destroyed."
     end
   end
 
