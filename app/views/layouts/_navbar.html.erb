@@ -7,19 +7,42 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <%= link_to "Home", root_path, class: "nav-link active" %>
-        </li>
-        <li class="nav-item">
           <%= link_to "Stations", stations_path, class: "nav-link active" %>
         </li>
- 
-        <li class="nav-item pe-2">
-          <%= form_tag stations_path, method: :get do %>
-          <%= text_field_tag :search, params[:search], placeholder: "Search Station", class: "form-control me-2"  %>
-        </li>
-           <%= submit_tag 'Search', class: "btn btn-outline-success ps-2", :name => nil %>
+        <% if user_signed_in?  %>
+          <li class="nav-item pt-2">
+            Logged in <strong><%= current_user.email %></strong>
+          </li>             
+          <li class="nav-item">
+            <%= link_to 'Edit profile', edit_user_registration_path, class: 'nav-link active' %>
+          </li> 
+          <li class="nav-item">
+            <%= link_to "Logout", destroy_user_session_path, method: :delete, class: 'nav-link active'  %>
+          </li>
+          <% if admin? %>
+            <li class="nav-item">
+              <%= link_to 'Create Station', new_station_path, class: 'nav-link active' %>
+            </li> 
+            <li class="nav-item">
+              <%= link_to 'Create Train', new_train_path, class: 'nav-link active' %>
+            </li> 
+          <% end %>
+        <% else %>
+          <li class="nav-item">
+            <%= link_to "Sign up", new_user_registration_path, class: 'nav-link active'  %>
+          </li> 
+          <li class="nav-item">
+            <%= link_to "Login", new_user_session_path, class:'nav-link active'  %>
+          </li>
         <% end %>
       </ul>
+
+      <li class="nav-item pb-3">
+        <%= form_tag stations_path, method: :get do %>
+        <%= text_field_tag :search, params[:search], placeholder: "Search Station", class: "form-control"  %>
+      </li>
+          <%= submit_tag 'Search', class: "btn btn-outline-success pt-2 ", :name => nil %>
+        <% end %>
     </div>
   </div>
 </nav>

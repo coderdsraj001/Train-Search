@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
 	require 'time'
 
-	helper_method :custom_duration_to_hours_mn_sec_str, :range_of_current_to_two_hour_later
+	helper_method :custom_duration_to_hours_mn_sec_str, :range_of_current_to_two_hour_later, :admin?
 
 	def custom_duration_to_hours_mn_sec_str(duration)
 	  hr, min = duration.divmod(60)
@@ -15,5 +15,13 @@ class ApplicationController < ActionController::Base
 		two_hour_after_current = current_time + (2*60)
 		a = (current_time..two_hour_after_current).to_a
 	end
+
+	def admin?
+		current_user.admin?
+	end
+
+	def authorize_admin
+    redirect_to root_path, alert: 'Access Denied' unless current_user.admin?
+  end
 
 end

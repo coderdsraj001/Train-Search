@@ -1,4 +1,6 @@
 class StationsController < ApplicationController
+  before_action :authorize_admin, except: [:index, :show]
+  before_action :authenticate_user!, except: [:index, :show]
   before_action :set_station, only: %i[ show edit update destroy ]
 
   def index
