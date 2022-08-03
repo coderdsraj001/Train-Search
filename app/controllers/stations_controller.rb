@@ -12,7 +12,8 @@ class StationsController < ApplicationController
   end
 
   def show
-    @trains = @station.trains
+    @station = Station.find(params[:id])
+    @response = TrainTimePresenter.new(@station)
   end
 
   def new
